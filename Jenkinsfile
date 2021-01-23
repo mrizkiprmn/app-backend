@@ -1,5 +1,5 @@
-// def dockerhub = "mrizkiprmn/backend-jenkins"
-// def image_name = "${dockerhub}:${BRANCH_NAME}"
+def dockerhub = "mrizkiprmn/backend-jenkins"
+def image_name = "${dockerhub}:${BRANCH_NAME}"
 def builder
 
 pipeline {
@@ -24,7 +24,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    builder = docker.build("mrizkiprmn/backend-jenkins:master")
+                    builder = docker.build("${dockerhub}:${BRANCH_NAME}")
                 }
             }
         }
@@ -58,31 +58,31 @@ pipeline {
             }
         }
 
-//         stage('Deploy on develop') {
-//             when {
-//                 expression {
-//                     params.DEPLOY == 'Develop' || BRANCH_NAME == 'dev'
-//                 }
-//             }
-//             steps {
-//                 script {
-//                     sshPublisher(
-//                         publishers: [
-//                             sshPublisherDesc(
-//                                 configName: 'dev-user',
-//                                 verbose: false,
-//                                 transfers: [
-//                                     sshTransfer(
-//                                         execCommand: 'docker-compose up -d',
-//                                         execTimeout: 120000,
-//                                     )
-//                                 ]
-//                             )
-//                         ]
-//                     )
-//                 }
-//             }
-//         }
+        // stage('Deploy on develop') {
+        //     when {
+        //         expression {
+        //             params.DEPLOY == 'Develop' || BRANCH_NAME == 'dev'
+        //         }
+        //     }
+        //     steps {
+        //         script {
+        //             sshPublisher(
+        //                 publishers: [
+        //                     sshPublisherDesc(
+        //                         configName: 'dev-user',
+        //                         verbose: false,
+        //                         transfers: [
+        //                             sshTransfer(
+        //                                 execCommand: 'docker-compose up -d',
+        //                                 execTimeout: 120000,
+        //                             )
+        //                         ]
+        //                     )
+        //                 ]
+        //             )
+        //         }
+        //     }
+        // }
 //         stage('Deploy on production') {
 //             when {
 //                 expression {
