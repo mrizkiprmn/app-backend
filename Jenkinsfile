@@ -53,7 +53,7 @@ pipeline {
             steps {
                 
                 script {
-                    builder.push()
+                    builder.push("${env.GIT_BRANCH}")
                 }
             }
         }
