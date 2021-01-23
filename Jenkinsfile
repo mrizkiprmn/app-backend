@@ -73,7 +73,7 @@ pipeline {
                                 verbose: false,
                                 transfers: [
                                     sshTransfer(
-                                        sourceFiles: 'docker-compose.yaml',
+                                        // sourceFiles: 'docker-compose.yaml',
                                         execCommand: 'docker-compose stop; docker-compose up -d',
                                         execTimeout: 120000,
                                     )
