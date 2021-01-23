@@ -43,8 +43,18 @@ services:
       image: mrizkiprmn/backend-jenkins:master
       ports: 
           - "8282-8283:8888"
-      env_file: 
-          - ./backend/.env
+      environment: 
+          - DBUSER=rizkipermana
+          - DBPASSWORD=admin123
+          - DBNAME=prods
+          - DBHOST=postgres
+          - DBPORT=5432
+          - JWT_KEYS=inipunyarizki
+          - CLOUD_KEY=327521863331962
+          - CLOUD_SECRET=sr374waC435g04cuHmrWIqfEUE4
+          - CLOUD_NAME=coffeshop
+          - REDIS_HOST=redis
+          - REDIS_PORT=6379
       deploy:
        mode: replicated
        replicas: 2
