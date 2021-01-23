@@ -1,5 +1,5 @@
-def dockerhub = "mrizkiprmn/backend-jenkins"
-def image_name = "${dockerhub}:${BRANCH_NAME}"
+// def dockerhub = "mrizkiprmn/backend-jenkins"
+// def image_name = "${dockerhub}:${BRANCH_NAME}"
 def builder
 
 pipeline {
@@ -24,7 +24,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    builder = docker.build("${dockerhub}:${BRANCH_NAME}")
+                    builder = docker.build("mrizkiprmn/backend-jenkins:master")
                 }
             }
         }
