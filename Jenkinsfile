@@ -8,7 +8,7 @@ pipeline {
 
     parameters {
         booleanParam(name: 'RUNTEST', defaultValue: 'true', description: 'Click this for testing')
-        choice(name: 'DEPLOY', choices: ['Master' ,'Develop', 'Production'], description: 'Pick something')
+        choice(name: 'DEPLOY', choices: ['Develop', 'Production'], description: 'Pick something')
     }
 
     stages {
@@ -57,58 +57,59 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy on develop') {
+            when {
+                expression {
+                    params.DEPLOY == 'Develop' || BRANCH_NAME == 'dev'
+                }
+            }
+            steps {
+                script {
+                    sshPublisher(
+                        publishers: [
+                            sshPublisherDesc(
+                                configName: 'devserver',
+                                verbose: false,
+                                transfers: [
+                                    sshTransfer(
+                                        sourceFiles: 'docker-compose.yaml',
+                                        execCommand: 'docker-compose stop; docker-compose up -d',
+                                        execTimeout: 120000,
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                }
+            }
+        }
+        
+        stage('Deploy on production') {
+            when {
+                expression {
+                    params.DEPLOY == 'Production' || BRANCH_NAME == 'prod'
+                }
+            }
+            steps {
+                script {
+                    sshPublisher(
+                        publishers: [
+                            sshPublisherDesc(
+                                configName: 'prodserver',
+                                verbose: false,
+                                transfers: [
+                                    sshTransfer(
+                                        sourceFiles: 'docker-compose.yaml',
+                                        execCommand: 'docker-compose stop; docker-compose up -d',
+                                        execTimeout: 120000,
+                                    )
+                                ]
+                            )
+                        ]
+                    )
+                }
+            }
+        }
     }
 }
-
-        // stage('Deploy on develop') {
-        //     when {
-        //         expression {
-        //             params.DEPLOY == 'Develop' || BRANCH_NAME == 'dev'
-        //         }
-        //     }
-        //     steps {
-        //         script {
-        //             sshPublisher(
-        //                 publishers: [
-        //                     sshPublisherDesc(
-        //                         configName: 'dev-user',
-        //                         verbose: false,
-        //                         transfers: [
-        //                             sshTransfer(
-        //                                 execCommand: 'docker-compose up -d',
-        //                                 execTimeout: 120000,
-        //                             )
-        //                         ]
-        //                     )
-        //                 ]
-        //             )
-        //         }
-        //     }
-        // }
-//         stage('Deploy on production') {
-//             when {
-//                 expression {
-//                     params.DEPLOY == 'Production' || BRANCH_NAME == 'prod'
-//                 }
-//             }
-//             steps {
-//                 script {
-//                     sshPublisher(
-//                         publishers: [
-//                             sshPublisherDesc(
-//                                 configName: 'prod-user',
-//                                 verbose: false,
-//                                 transfers: [
-//                                     sshTransfer(
-//                                         execCommand: 'docker-compose up -d',
-//                                         execTimeout: 120000,
-//                                     )
-//                                 ]
-//                             )
-//                         ]
-//                     )
-//                 }
-//             }
-//         }
-//     }
-// }
