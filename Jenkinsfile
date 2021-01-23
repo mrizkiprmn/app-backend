@@ -7,8 +7,8 @@ pipeline {
     agent any
 
     parameters {
-        booleanParam(name: 'RUNTEST', defaultValue: 'true', description: 'Click this for testing')
-        choice(name: 'DEPLOY', choices: ['Develop', 'Production'], description: 'Pick something')
+        booleanParam(name: 'RUNTEST', defaultValue: 'true', description: 'Checklist for RUNTEST')
+        choice(name: 'DEPLOY', choices: ['Develop', 'Production'], description: 'Select for DEPLOY')
     }
 
     stages {
@@ -102,7 +102,8 @@ pipeline {
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'docker-compose.yaml',
-                                        execCommand: 'docker-compose stop; docker-compose up -d',
+                                        remoteDirectory: 'backend',
+                                        execCommand: 'cd backend && cd backend && docker-compose stop && docker-compose up -d',
                                         execTimeout: 120000,
                                     )
                                 ]
