@@ -4,7 +4,7 @@ services:
       container_name: postgres-app
       image: postgres:latest
       ports: 
-        - "5432:5432"
+        - "5234:5432"
       volumes: 
         - ./pg-data:/var/lib/postgresql/data
       networks: 
@@ -21,7 +21,7 @@ services:
       environment: 
         - REDIS_PORT=6379
       ports:  
-        - "6379:6379"
+        - "6937:6379"
       networks: 
         - netnet
       volumes: 
