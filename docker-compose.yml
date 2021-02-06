@@ -14,18 +14,6 @@ services:
         - POSTGRES_PASSWORD=admin123
         - POSTGRES_DB=prods
 
-  pgadmin:
-     container_name: pgadmin-app
-     image: dpage/pgadmin4
-     ports:
-        - "6789:80"
-     environment:
-        PGADMIN_DEFAULT_EMAIL: admin@example.com
-        PGADMIN_DEFAULT_PASSWORD: root
-     restart: unless-stopped
-     networks:
-        - netnet
-
   redis:
       container_name: redis-app
       image: redis:alpine3.12
