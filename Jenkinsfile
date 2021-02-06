@@ -29,14 +29,6 @@ pipeline {
             }
         }
 
-        stage("Remove Unused Docker Image"){
-            steps{
-                script {
-                    sh 'docker rmi \$(docker images -f "dangling=true" -q)'
-                }
-            }
-        }
-
         stage('Run Testing') {
             when {
                 expression {
