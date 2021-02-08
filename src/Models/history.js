@@ -19,7 +19,7 @@ history.get= () => {
 
 history.add = (data) =>{
     return new Promise((resolve, reject) =>{
-        db.query(`INSERT INTO public.history(cashier, orders, amount, date) VALUES ('${data.cashier}', '${data.orders}', ${data.amount})`)
+        db.query(`INSERT INTO public.history(cashier, orders, amount) VALUES ('${data.cashier}', '${data.orders}', ${data.amount})`)
         .then((res) => {
             resolve(data)
         })
