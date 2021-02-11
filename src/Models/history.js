@@ -19,7 +19,7 @@ history.get= () => {
 
 history.add = (data) =>{
     return new Promise((resolve, reject) =>{
-        db.query(`INSERT INTO public.history(cashier, orders, amount) VALUES ('${data.cashier}', '${data.orders}', ${data.amount})`)
+        db.query(`INSERT INTO public.history(cashier, orders, amount, "users", invoices) VALUES ('${data.cashier}', '${data.orders}', ${data.amount}, '${data.users}', '${data.invoices}')`)
         .then((res) => {
             resolve(data)
         })
@@ -31,7 +31,7 @@ history.add = (data) =>{
 
 history.update = (data) =>{
     return new Promise((resolve, reject) =>{
-        db.query(`UPDATE public.history SET cashier='${data.cashier}', orders='${data.orders}', amount=${data.amount}, WHERE id=${data.id}`)
+        db.query(`UPDATE public.history SET cashier='${data.cashier}', orders='${data.orders}', amount=${data.amount}, users='${data.users}' invoices='${data.invoices}' WHERE id=${data.id}`)
         .then((res) => {
             resolve(data)
         })
