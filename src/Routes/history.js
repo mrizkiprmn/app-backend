@@ -5,7 +5,7 @@ const ctrl = require("../Controllers/history");
 
 
 routes.get('/',validate(["admin"]),ctrl.get);
-routes.post("/",validate(["admin"]),ctrl.add);
+routes.post("/",validate(["admin", "customer"]),ctrl.add);
 routes.delete("/:id",validate(["admin"]),ctrl.del);
 
 module.exports = routes;
