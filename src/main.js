@@ -1,6 +1,7 @@
 const express = require("express");
 const routes = express.Router();
 const product = require("./Routes/product");
+const sorted = require("./Routes/sorted")
 const category = require("./Routes/category");
 const history = require("./Routes/history");
 const users = require("./Routes/users");
@@ -9,6 +10,7 @@ const { cloudinaryConfig } = require("./Configs/cloudInary")
 const logger = require("../utils/logger")
 
 routes.use("*", cloudinaryConfig)
+routes.use("/sorted", sorted)
 routes.use("/product", product);
 routes.use("/category", category);
 routes.use("/history", history);

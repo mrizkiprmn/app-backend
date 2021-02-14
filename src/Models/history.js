@@ -29,24 +29,11 @@ history.add = (data) =>{
     });
 };
 
-history.update = (data) =>{
-    return new Promise((resolve, reject) =>{
-        db.query(`UPDATE public.history SET cashier='${data.cashier}', orders='${data.orders}', amount=${data.amount}, users='${data.users}' invoices='${data.invoices}' WHERE id=${data.id}`)
-        .then((res) => {
-            resolve(data)
-        })
-        .catch((err) => {
-            reject("Data not completed")
-        });
-    });
-};
-
-
 history.del= (id) =>{
     return new Promise((resolve, reject) =>{
         db.query(`DELETE FROM public.history WHERE id=${id}`)
         .then((res) => {
-            resolve(id)
+            resolve({msg: 'success deleted', id})
         })
         .catch((err) => {
             reject("id not found")

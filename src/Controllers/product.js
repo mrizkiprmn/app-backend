@@ -20,48 +20,6 @@ product.getAll = async (req, res) => {
     };
   };
 
-product.get = async (req, res) => {
-      const { search } = req.query;
-      const { orderBy, sort } = req.query;
-      let result;
-    try {
-      if (search) {
-        result = await model.getSearch(search);
-      } else if (orderBy) {
-        result = await model.getSort(orderBy, sort);
-      } else {
-      result = await model.get(req.params.id);
-      }
-      logger.info("Get Product by id Success")
-      return response(res, 200, result);
-    } catch (error) {
-      logger.error("Get Product by id Failed")
-      return response(res, 500, error);
-    };
-  };
-
-
-product.getSort = async (req, res) => {
-    try {
-      const result = await model.getSort(req.query.orderBy, req.query.sort)
-      logger.info("Sort Product Success")
-      return response(res, 200, result)
-    } catch (error) {
-      logger.error("Sort Product Failed")
-      return response(res, 500, error)
-    }
-}
-
-product.getSearch = async (req, res) => {
-  try {
-    const result = await model.getSearch(req.query)
-    logger.info("Search Product Success")
-    return response(res, 200, result)
-  } catch (error) {
-    logger.error("Search Product Failed")
-    return response(res, 500, error)
-  }
-}
 
 product.add = async (req, res) => {
     try {

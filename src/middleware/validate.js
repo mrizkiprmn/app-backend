@@ -13,25 +13,25 @@ const checkToken = (roles) => {
             msg : "Login first"
         }
         logger.error("Login First")
-        return response(res, 401, result)
+        return response(res, 209, result)
     }
 
     jwt.verify(authtoken, process.env.JWT_KEYS, (err, decode)=> {
         if(err) {
             logger.error("Check token")
-            return response(res, 401, {msg : "Check Token!"})
+            return response(res, 209, {msg : "Check Token!"})
         }
         roles.map((role) => {
             console.log(decode.role)
             if(role == decode.role) {
-                isAccess = true
+                isAccess = true;
             }
         })
             if(isAccess) {
                 next()
             } else {
                 logger.error("You not premitted")
-                return response(res, 401, {msg: "you not premitted"})
+                return response(res, 209, {msg: "you not premitted"})
             }
        })
     }

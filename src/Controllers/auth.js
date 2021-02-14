@@ -31,18 +31,18 @@ class Auth {
     }
     login = async (req, res) =>{
         try {
-        const userDB = await model.getByEmail(req.body.email)
+        const userDB = await model.getByUserName(req.body.username)
         const passUser = req.body.password
             
          if (userDB.length <= 0) {
             logger.error("Email not registered")
-            return response(res, 200, {msg: "Email not registered"})
+            return response(res, 200, {msg: "Username not registered"})
         }
         
         const check = await bcr.compare(passUser, userDB[0].password)
 
         if (check) { 
-            const result = await this.setToken(req.body.email, userDB[0].username, userDB[0].role)
+            const result = await this.setToken(req.body.username, userDB[0].username, userDB[0].role)
             return response(res, 200, result)
         } 
             logger.error("Check Password")

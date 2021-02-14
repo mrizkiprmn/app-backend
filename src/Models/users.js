@@ -1,3 +1,4 @@
+const { data } = require("../../utils/logger");
 const db = require("../Configs/db");
 const users = {};
 
@@ -68,7 +69,6 @@ users.update = (data) =>{
   return new Promise((resolve, reject) => {
       db.query(`UPDATE public.users SET username='${data.username}', email='${data.email}', password='${data.password}' WHERE id=${data.id}`)
       .then((res) => {
-        console.log("masuk model")
           resolve(data)
       })
       .catch((err) => {
@@ -81,7 +81,7 @@ users.del = (id) =>{
     return new Promise((resolve, reject) => {
         db.query(`DELETE FROM public.users WHERE id=${id}`)
         .then((res) => {
-            resolve(id);
+            resolve({msg: 'success deleted', id});
         })
         .catch((err) => {
             reject("id not found");

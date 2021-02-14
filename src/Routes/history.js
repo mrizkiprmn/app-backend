@@ -4,9 +4,8 @@ const routes = express.Router();
 const ctrl = require("../Controllers/history");
 
 
-routes.get('/',validate(["admin","users"]),ctrl.get);
-routes.post("/",validate(["admin","users"]),ctrl.add);
-routes.put("/", ctrl.update);
-routes.delete("/:id",validate(["admin","users"]),ctrl.del);
+routes.get('/',validate(["admin"]),ctrl.get);
+routes.post("/",validate(["admin"]),ctrl.add);
+routes.delete("/:id",validate(["admin"]),ctrl.del);
 
 module.exports = routes;

@@ -21,15 +21,6 @@ history.get = async (req, res) => {
     
 };
 
-history.update = async (req, res) => {
-    try {
-        const result = await model.update(req.body);
-        return response(res, 200, result);
-    } catch (error){
-        return response(res, 400, error);
-    };
-};
-
 history.del = async (req, res) => {
    try {
        const result = await model.del(req.params.id);

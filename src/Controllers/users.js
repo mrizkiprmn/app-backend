@@ -25,12 +25,12 @@ users.add = async (req, res) => {
 
         if(checkUser.length > 0) {
             logger.error("Username has been registered")
-            return response(res, 401, {msg: "username has been registered"})
+            return response(res, 209, {msg: "username has been registered"})
         }
 
         if(checkEmail.length > 0) {
             logger.error("Email has been registered")
-            return response(res, 401, {msg: "email has been registered"})
+            return response(res, 209, {msg: "email has been registered"})
         }
 
         const newPassword = await hashPassword(req.body.password)
