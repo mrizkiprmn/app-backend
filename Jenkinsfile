@@ -8,7 +8,7 @@ pipeline {
 
     parameters {
         booleanParam(name: 'RUNTEST', defaultValue: 'true', description: 'Checklist for RUNTEST')
-        choice(name: 'DEPLOY', choices: ['Develop', 'Production'], description: 'Select for DEPLOY')
+        choice(name: 'DEPLOY', choices: ['yes', 'no'], description: 'Deploy on Stagging')
     }
 
     stages {
@@ -29,7 +29,7 @@ pipeline {
             }
         }
 
-        stage('Run Testing') {
+        stage('Testing Images') {
             when {
                 expression {
                     params.RUNTEST
@@ -45,11 +45,6 @@ pipeline {
         }
 
         stage('Push Image') {
-            when {
-                expression {
-                    params.RUNTEST
-                }
-            }
             steps {
                 
                 script {
@@ -58,52 +53,25 @@ pipeline {
             }
         }
 
-        stage('Deploy on develop') {
+        stage('Deploy on Stagging') {
             when {
                 expression {
-                    params.DEPLOY == 'Develop' || BRANCH_NAME == 'dev'
+                    params.DEPLOY == 'yes'
                 }
             }
             steps {
                 script {
+                    if(BRANCH_NAME == 'master'){
                     sshPublisher(
                         publishers: [
                             sshPublisherDesc(
-                                configName: 'devserver',
+                                configName: 'staggingserver',
                                 verbose: false,
                                 transfers: [
                                     sshTransfer(
                                         sourceFiles: 'docker-compose.yml',
                                         remoteDirectory: 'app',
-                                        execCommand: "docker pull ${dockerhub}:${BRANCH_NAME}; cd ./app/app; docker-compose stop; docker-compose up -d --force-recreate",
-                                        execTimeout: 120000,
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                }
-            }
-        }
-        
-        stage('Deploy on production') {
-            when {
-                expression {
-                    params.DEPLOY == 'Production' || BRANCH_NAME == 'prod'
-                }
-            }
-            steps {
-                script {
-                    sshPublisher(
-                        publishers: [
-                            sshPublisherDesc(
-                                configName: 'prodserver',
-                                verbose: false,
-                                transfers: [
-                                    sshTransfer(
-                                        sourceFiles: 'docker-compose.yml',
-                                        remoteDirectory: 'app',
-                                        execCommand: "docker pull ${dockerhub}:${BRANCH_NAME}; cd ./app/app; docker-compose up -d --force-recreate",
+                                        execCommand: "docker pull ${dockerhub}:${BRANCH_NAME}; cd ./home/rizki/app; docker-compose up -d --force-recreate",
                                         execTimeout: 120000,
                                     )
                                 ]
@@ -114,4 +82,5 @@ pipeline {
             }
         }
     }
+}
 }
