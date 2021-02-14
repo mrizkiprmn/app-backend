@@ -70,7 +70,7 @@ pipeline {
                                     transfers: [
                                         sshTransfer(
                                             sourceFiles: 'docker-compose.yml',
-                                            execCommand: "docker pull ${dockerhub}:${BRANCH_NAME}; cd ./home/rizki/app; docker-compose up -d --force-recreate",
+                                            execCommand: "docker pull ${dockerhub}:${BRANCH_NAME}; cd /home/rizki/app; docker-compose up -d --force-recreate",
                                             execTimeout: 120000,
                                         )
                                     ]
