@@ -7,7 +7,8 @@ pipeline {
     agent any
 
     parameters {
-        booleanParam(name: 'RUNTEST', defaultValue: 'true', description: 'Checklist for RUNTEST')
+        string(name: 'DOCKERHUB', defaultValue: "${image_name}", description: 'Dockerhub Rizki')
+        booleanParam(name: 'RUNTEST', defaultValue: 'false', description: 'Checklist for RUNTEST')
         choice(name: 'DEPLOY', choices: ['yes', 'no'], description: 'Deploy on Stagging')
     }
 
