@@ -4,14 +4,14 @@ services:
       container_name: postgres-app
       image: postgres:latest
       ports: 
-        - "5234:5432"
+        - "5432:5432"
       volumes: 
         - ./pg-data:/var/lib/postgresql/data
       networks: 
         - netnet
       environment: 
-        - POSTGRES_USER=rizkipermana
-        - POSTGRES_PASSWORD=admin123
+        - POSTGRES_USER=abiwardani
+        - POSTGRES_PASSWORD=yuhagasir14
         - POSTGRES_DB=prods
 
   redis:
@@ -21,7 +21,7 @@ services:
       environment: 
         - REDIS_PORT=6379
       ports:  
-        - "6937:6379"
+        - "6379:6379"
       networks: 
         - netnet
       volumes: 
@@ -32,8 +32,8 @@ services:
       ports: 
           - "8282-8283:8888"
       environment: 
-          - DBUSER=rizkipermana
-          - DBPASSWORD=admin123
+          - DBUSER=abiwardani
+          - DBPASSWORD=yuhagasiri44
           - DBNAME=prods
           - DBHOST=postgres
           - DBPORT=5432
