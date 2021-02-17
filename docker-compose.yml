@@ -1,21 +1,7 @@
 version: "3.7"
 services: 
-  postgres:
-      container_name: postgres-app
-      image: postgres:latest
-      ports: 
-        - "5353:5432"
-      volumes: 
-        - ./pg-data:/var/lib/postgresql/data
-      networks: 
-        - netnet
-      environment: 
-        - POSTGRES_USER=rizkipermana
-        - POSTGRES_PASSWORD=admin123
-        - POSTGRES_DB=prods
-
   redis:
-      container_name: redis-app
+      container_name: redis-coffeeit
       image: redis:alpine3.12
       command: redis-server
       environment: 
@@ -28,14 +14,15 @@ services:
         - ./redis-data:/data
 
   backend:
+      container_name: coffeit_backend
       image: mrizkiprmn/backend-jenkins:master
       ports: 
           - "8282-8283:8888"
       environment: 
           - DBUSER=rizkipermana
           - DBPASSWORD=admin123
-          - DBNAME=prods
-          - DBHOST=postgres
+          - DBNAME=coffeeit
+          - DBHOST=3.83.153.65
           - DBPORT=5432
           - JWT_KEYS=inipunyarizki
           - CLOUD_KEY=327521863331962
@@ -53,12 +40,11 @@ services:
       networks: 
           - netnet
       depends_on: 
-          - postgres
+          - redis
 
 networks: 
     netnet:
         driver: bridge
 
 volumes: 
-    pg-data:
     redis-data:
