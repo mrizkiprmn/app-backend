@@ -1,13 +1,16 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: be-cfg
+  name: configmap
   namespace: app
 data:
-  DBNAME : prod
-  DBPASSWORD: HwiAJpH73g
-  DBPORT: "5432"
-  DBHOST: db-postgresql.app.svc.cluster.local
-  DBUSER: postgres
-  REDIS_HOST: redis-master.app.svc.cluster.local
-  REDIS_PORT: "6379"
+  DBHOST: 
+  DBNAME: 
+  DBPASSWORD: 
+  DBPORT: 
+  DBUSER: 
+  JWT_KEYS: 
+  REDIS_HOST: 
+  REDIS_PASS: 
+  REDIS_PORT: 
+  VUE_APP_URL: 
