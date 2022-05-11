@@ -1,8 +1,8 @@
 FROM node:lts-alpine
 
-RUN mkdir -p /usr/apicoffeeshop
+RUN mkdir -p /usr/app
 
-WORKDIR /usr/apicoffeeshop
+WORKDIR /usr/app
 
 COPY package*.json ./
 
