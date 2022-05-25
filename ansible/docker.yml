@@ -1,0 +1,47 @@
+- hosts: localhost
+  connection: local
+
+
+    vars: 
+      hub: "mrizkiprmn"
+      proj: "app-backend"
+      tag: "v.1"
+      dir: /home/mrizkiprmn/Documents/github/app-backend
+      repo: https://github.com/mrizkiprmn/app-backend.git
+      container_name: app-backend
+
+    
+    pre_tasks:
+  
+      - name: install pre-requisites
+        pip:
+          name: 
+          - docker
+
+    tasks:
+
+      - name: build image
+        community.docker.docker_image:
+          name: "{{hub}}/{{proj}}:{{tag}}"
+          build:
+            path: "{{dir}}/{{proj}}"
+          source: build
+
+      - name: push image to registry
+        community.docker.docker_image:
+          name: "{{hub}}/{{proj}}:{{tag}}"
+          repository: "{{hub}}/{{proj}}:{{tag}}"
+          push: yes
+          source: local
+
+      - name: remove image unused
+        community.docker.docker_image:
+          state: absent
+          name: "{{hub}}/{{proj}}"
+          tag: "{{tag}}"
+          force_tag: yes
+
+       - name: pull image from registry
+         community.docker.docker_image:
+           name: "{{hub}}/{{proj}}:{{tag}}"
+           source: pull

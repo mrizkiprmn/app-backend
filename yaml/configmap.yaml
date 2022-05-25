@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: be-cfg  
+  name: be-cfg
   namespace: app-backend
 data:
   DBHOST: 
