@@ -3,7 +3,9 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-namespace: app
+namespace: app-backend
+
+configmap: be-cfg
 
 image:
   repository: mrizkiprmn/backend
@@ -11,7 +13,8 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v.2"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: regcred
 nameOverride: ""
 fullnameOverride: ""
 
@@ -69,12 +72,10 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-configmap: be-cfg
-
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 10
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 

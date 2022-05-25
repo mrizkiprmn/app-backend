@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: configmap
-  namespace: app
+  name: be-cfg  
+  namespace: app-backend
 data:
   DBHOST: 
   DBNAME: 
@@ -13,4 +13,3 @@ data:
   REDIS_HOST: 
   REDIS_PASS: 
   REDIS_PORT: 
-  VUE_APP_URL: 
