@@ -6,10 +6,10 @@ replicaCount: 1
 namespace: app-backend
 
 image:
-  repository: mrizkiprmn/backend
+  repository: mrizkiprmn/app-backend
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v.2"
+  tag: "v.1"
 
 imagePullSecrets:
   - name: regcred

@@ -13,7 +13,7 @@
         name:
           - openshift
           - pyyaml
-          - kubernetes 
+          - kubernetes
 
     - name: install Helm Diff
       kubernetes.core.helm_plugin:
