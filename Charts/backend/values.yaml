@@ -5,8 +5,6 @@
 replicaCount: 1
 namespace: app-backend
 
-configmap: be-cfg
-
 image:
   repository: mrizkiprmn/backend
   pullPolicy: Always
@@ -17,6 +15,17 @@ imagePullSecrets:
   - name: regcred
 nameOverride: ""
 fullnameOverride: ""
+configmap: be-cfg
+configValue:
+  DBHOST: ''
+  DBNAME: ''
+  DBPASSWORD: ''
+  DBPORT: ''
+  DBUSER: ''
+  JWT_KEYS: ''
+  REDIS_HOST: ''
+  REDIS_PASS: ''
+  REDIS_PORT: ''
 
 serviceAccount:
   # Specifies whether a service account should be created
