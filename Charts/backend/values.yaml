@@ -36,11 +36,14 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+serviceAnnotations:
+  prometheus.io/scrape: 'true'
+  prometheus.io/port: '9090'
+
 podAnnotations:
   configmap.reloader.stakater.com/reload: be-cfg
   prometheus.io/scrape: 'true'
   prometheus.io/port: '9090'
-  prometheus.io/path: /metrics
 
 podSecurityContext: {}
   # fsGroup: 2000

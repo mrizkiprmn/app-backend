@@ -24,10 +24,10 @@ global:
   ## @param global.postgresql.replicationPassword Replication user password (overrides `replication.password`)
   ##
   postgresql:
-    postgresqlDatabase: ""
-    postgresqlUsername: ""
+    postgresqlDatabase: "prod"
+    postgresqlUsername: "postgres"
     existingSecret: ""
-    postgresqlPassword: ""
+    postgresqlPassword: "0QuB97bFsX"
     servicePort: ""
     replicationPassword: ""
 
@@ -856,7 +856,7 @@ tls:
 metrics:
   ## @param metrics.enabled Start a prometheus exporter
   ##
-  enabled: false
+  enabled: true
   ## @param metrics.resources Prometheus exporter container resources
   ##
   resources: {}
@@ -868,7 +868,7 @@ metrics:
     type: ClusterIP
     annotations:
       prometheus.io/scrape: "true"
-      prometheus.io/port: "9187"
+      prometheus.io/port: "9090"
     loadBalancerIP: ""
   ## @param metrics.serviceMonitor.enabled Set this to `true` to create ServiceMonitor for Prometheus operator
   ## @param metrics.serviceMonitor.additionalLabels Additional labels that can be used so ServiceMonitor will be discovered by Prometheus
