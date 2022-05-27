@@ -38,6 +38,9 @@ serviceAccount:
 
 podAnnotations:
   configmap.reloader.stakater.com/reload: be-cfg
+  prometheus.io/scrape: 'true'
+  prometheus.io/port: '9090'
+  prometheus.io/path: /metrics
 
 podSecurityContext: {}
   # fsGroup: 2000
