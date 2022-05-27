@@ -5,7 +5,7 @@
   vars: 
     hub: "mrizkiprmn"
     proj: "app-backend"
-    tag: "v.1"
+    tag: "sit"
     dir: /home/mrizkiprmn/Documents/github
     repo: https://github.com/mrizkiprmn/app-backend.git
 
