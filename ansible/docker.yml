@@ -5,8 +5,8 @@
   vars: 
     hub: "mrizkiprmn"
     proj: "app-backend"
-    tag: "sit"
-    dir: /home/mrizkiprmn/Documents/github
+    tag: "windows"
+    dir: /home/mrizkiprmn/github
     repo: https://github.com/mrizkiprmn/app-backend.git
 
     
@@ -26,15 +26,17 @@
           path: "{{dir}}/{{proj}}"
         source: build
 
+
     - name: push image to registry
       community.docker.docker_image:
         name: "{{hub}}/{{proj}}:{{tag}}"
         repository: "{{hub}}/{{proj}}:{{tag}}"
         push: yes
         source: local
+    
 
     - name: remove image unused
-      community.docker.docker_image:
+      docker_image:
         state: absent
         name: "{{hub}}/{{proj}}"
         tag: "{{tag}}"

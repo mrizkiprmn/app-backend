@@ -24,10 +24,10 @@ global:
   ## @param global.postgresql.replicationPassword Replication user password (overrides `replication.password`)
   ##
   postgresql:
-    postgresqlDatabase: "prod"
+    postgresqlDatabase: "restaurant"
     postgresqlUsername: "postgres"
     existingSecret: ""
-    postgresqlPassword: "0QuB97bFsX"
+    postgresqlPassword: "1DfguZczmZ"
     servicePort: ""
     replicationPassword: ""
 
@@ -856,7 +856,7 @@ tls:
 metrics:
   ## @param metrics.enabled Start a prometheus exporter
   ##
-  enabled: true
+  enabled: false
   ## @param metrics.resources Prometheus exporter container resources
   ##
   resources: {}
