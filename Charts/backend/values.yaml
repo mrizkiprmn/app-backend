@@ -24,7 +24,7 @@ configValue:
   DBUSER: 'postgres'
   JWT_KEYS: 'secret'
   REDIS_HOST: 'redis-master.db-app.svc.cluster.local'
-  REDIS_PASS: 'ti3LvNMI6Z'
+  REDIS_PASS: 'X8QMBqQ1Ft'
   REDIS_PORT: '6379'
 
 serviceAccount:
