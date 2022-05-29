@@ -4,9 +4,9 @@
 
   vars: 
     registry : ghcr.io/mrizkiprmn
-    proj: app-backend
-    tag : 0.1.0
-    dir : /home/mrizkiprmn/github
+    proj     : app-backend
+    tag      : 0.1.0
+    dir      : /home/mrizkiprmn/github
     
   pre_tasks:
   
