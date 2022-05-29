@@ -2,7 +2,7 @@
   connection: local
 
   vars:
-    project: be
+    project: backend
     namespace: app-backend
     src: /home/mrizkiprmn/github/app-backend/Charts/backend
 
