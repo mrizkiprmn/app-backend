@@ -4,7 +4,7 @@
   vars:
     project: be
     namespace: app-backend
-    src: /home/mrizkiprmn/Documents/github/app-backend/Charts/backend
+    src: /home/mrizkiprmn/github/app-backend/Charts/backend
 
   pre_tasks:
 
@@ -24,6 +24,6 @@
 
     - name: helm deploy
       kubernetes.core.helm:
-        name: be
+        name: "{{ project }}"
         namespace: "{{ namespace }}"
         chart_ref: "{{ src }}"

@@ -6,10 +6,10 @@ replicaCount: 1
 namespace: app-backend
 
 image:
-  repository: mrizkiprmn/app-backend
+  repository: ghcr.io/mrizkiprmn/app-backend
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "sit"
+  tag: ""
 
 imagePullSecrets:
   - name: regcred
@@ -17,14 +17,17 @@ nameOverride: ""
 fullnameOverride: ""
 configmap: "be-cfg"
 configValue:
-  DBHOST: 'db-postgresql.app-backend.svc.cluster.local'
-  DBNAME: 'prod'
-  DBPASSWORD: '0QuB97bFsX'
+  DBHOST: 'app-postgresql.db-app.svc.cluster.local'
+  DBNAME: 'restaurant'
+  DBPASSWORD: '1DfguZczmZ'
   DBPORT: '5432'
   DBUSER: 'postgres'
   JWT_KEYS: 'secret'
-  REDIS_HOST: 'redis-master.app-backend.svc.cluster.local'
-  REDIS_PASS: 'xaDBMeaRTo'
+  CLOUD_KEY: '327521863331962'
+  CLOUD_SECRET: 'sr374waC435g04cuHmrWIqfEUE4'
+  CLOUD_NAME: 'coffeshop'
+  REDIS_HOST: 'redis-master.db-app.svc.cluster.local'
+  REDIS_PASS: 'X8QMBqQ1Ft'
   REDIS_PORT: '6379'
 
 serviceAccount:
