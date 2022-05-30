@@ -7,7 +7,7 @@ jobs:
   DOCKER:
     runs-on: ubuntu-latest
 
-    if: GitHub.ref == 'refs/heads/windows' || GitHub.event_name == '0.1.0'
+    if: GitHub.ref == 'refs/heads/master' || GitHub.event_name == 'v.1'
     steps:
     - name: Checkout
       uses: actions/checkout@1.0.0
