@@ -8,7 +8,7 @@ const db = require('./src/Configs/db');
 const bodyPars = require("body-parser");
 const morgan = require("morgan");
 const redis = require("./src/Configs/redis")
-
+const metrics = require('./src/middleware/metrics')
 
 
 server.use(bodyPars.urlencoded({extended: false}));
@@ -16,6 +16,7 @@ server.use(cors());
 server.use(bodyPars.json());
 server.use(morgan("dev"));
 server.use('/api',routes)
+server.use('/metrics', metrics)
 // server.use(routes)
 
 
