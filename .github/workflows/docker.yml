@@ -9,11 +9,11 @@ jobs:
 
     if: GitHub.ref == 'refs/heads/master' || GitHub.event_name == 'v.1'
     steps:
-    - name: Checkout
+    - name: Checkout Code
       uses: actions/checkout@1.0.0
     
 
-    - name: Build and push
+    - name: Build and Push Images
       if: GitHub.event_name != 'pull_request'
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
