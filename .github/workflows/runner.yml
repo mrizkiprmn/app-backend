@@ -43,6 +43,5 @@ jobs:
         minikube service list
         minikube ip
         minikube service app-backend --url
-        curl http://192.168.49.2:31235
         
         
