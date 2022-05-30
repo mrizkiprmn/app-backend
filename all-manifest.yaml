@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: regcred
+  namespace: app-backend
+data:
+  .dockerconfigjson: ewogICAgImF1dGhzIjoKICAgIHsKICAgICAgICAiZ2hjci5pbyI6CiAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgICJhdXRoIjoiYlhKcGVtdHBjSEp0YmpwbmFIQmZRak5xTVVFd2MzZDBSMlp6TTJKV1dsRnhZMWxJT1doUGNEZENNVmxDTkRSVFRXWjIiCiAgICAgICAgICAgIH0KICAgIH0KfQo= 
+type: kubernetes.io/dockerconfigjson
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: be-cfg
+  namespace: app-backend
+data:
+  DBHOST: 'app-postgresql.db-app.svc.cluster.local'
+  DBNAME: 'restaurant'
+  DBPASSWORD: '1DfguZczmZ'
+  DBPORT: '5432'
+  DBUSER: 'postgres'
+  JWT_KEYS: 'secret'
+  CLOUD_KEY: '327521863331962'
+  CLOUD_SECRET: 'sr374waC435g04cuHmrWIqfEUE4'
+  CLOUD_NAME: 'coffeshop'
+  REDIS_HOST: 'redis-master.db-app.svc.cluster.local'
+  REDIS_PASS: 'X8QMBqQ1Ft'
+  REDIS_PORT: '6379'
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: app-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      annotations:
+        configmap.reloader.stakater.com/reload: be-cfg
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9090'
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: mrizkiprmn/app-backend:0.1.0
+        imagePullPolicy: Always
+        envFrom:
+            - configMapRef:
+                name: be-cfg
+        imagePullSecrets:
+          - name: regcred
+        ports:
+        - containerPort: 8888
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-backend
+  namespace: app-backend
+annotations:
+  prometheus.io/scrape: 'true'
+  prometheus.io/port: '9090'
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    nodePort: 31235
+    port: 8888
+    protocol: TCP
+    targetPort: 8888

@@ -1,0 +1,44 @@
+name: Docker Build & Push
+
+on: [push, pull_request]
+
+
+jobs:
+  DOCKER:
+    runs-on: ubuntu-latest
+
+    if: GitHub.ref == 'refs/heads/master' || GitHub.event_name == 'v.1'
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@1.0.0
+  
+
+    - name: Build and Push Images
+      if: GitHub.event_name != 'pull_request'
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: app-backend
+        tags: 0.1.0
+        registry: ghcr.io
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+      
+    DEPLOY_MINIKUBE:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@1.0.0
+    - name: Start Minikube
+      uses: medyagh/setup-minikube@master 
+    - name: Deploy all-manifest
+      run: |
+        kubectl create ns app-backend
+        kubectl apply -f all-manifest.yml
+    - name: Test services URLs
+      run: |
+        minikube service list
+        minikube ip
+        minikube service app-backend --url
+        curl http://192.168.49.2:31235
+        
+        
