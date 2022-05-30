@@ -67,7 +67,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-backend
+  name: backend
   namespace: app-backend
 annotations:
   prometheus.io/scrape: 'true'
