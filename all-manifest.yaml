@@ -50,17 +50,17 @@ spec:
       labels:
         app: backend
     spec:
-      containers:
-      - name: backend
-        image: mrizkiprmn/app-backend:0.1.0
-        imagePullPolicy: Always
-        envFrom:
-            - configMapRef:
-                name: be-cfg
       imagePullSecrets:
         - name: regcred
-        ports:
-        - containerPort: 8888
+      containers:
+        - name: backend
+          image: mrizkiprmn/app-backend:0.1.0
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8888
+          envFrom:
+            - configMapRef:
+                name: be-cfg
 
 ---
 
