@@ -8,6 +8,7 @@ const users = require("./Routes/users");
 const auth = require("./Routes/auth")
 const { cloudinaryConfig } = require("./Configs/cloudInary")
 const logger = require("../utils/logger")
+const metrics = require('./middleware/metrics')
 
 routes.use("*", cloudinaryConfig)
 routes.use("/sorted", sorted)
@@ -16,6 +17,7 @@ routes.use("/category", category);
 routes.use("/history", history);
 routes.use("/users", users);
 routes.use("/auth", auth);
+routes.use("/metrics", metrics)
 
 routes.use("*", (req, res)=> {
     logger.error("Check URL")
