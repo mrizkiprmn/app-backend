@@ -24,11 +24,28 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+  HELM:
+    needs: DOCKER
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@1.0.0
+
+    - name: Publish package helm chart
+      uses: bsord/helm-push@v4
+      with:
+        useOCIRegistry: true
+        registry-url:  https://ghcr.io/mrizkiprmn/app-backend
+        username: ${{ secrets.DOCKER_USER }}
+        access-token: ${{ secrets.DOCKER_PASSWORD }}
+        force: true
+        chart-folder: Charts/backend
 
   DEPLOY_MINIKUBE:
+    needs: HELM
     runs-on: ubuntu-latest
     
-    if: GitHub.ref == 'refs/heads/master' || GitHub.event_name == 'v.1'
     steps:
     - name: Checkout Code
       uses: actions/checkout@1.0.0
