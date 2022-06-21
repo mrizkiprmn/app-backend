@@ -14,7 +14,7 @@ class Auth {
                 role: role,
             }
 
-            const token = jwt.sign(payload, process.env.JWT_KEYS, { expiresIn : "3h" })
+            const token = jwt.sign(payload, process.env.JWT_KEYS, { expiresIn : "7d" })
 
             const result = {
                 msg : "Token created",
@@ -35,7 +35,7 @@ class Auth {
         const passUser = req.body.password
             
          if (userDB.length <= 0) {
-            logger.error("Email not registered")
+            logger.warn("Email not registered")
             return response(res, 200, {msg: "Username not registered"})
         }
         
@@ -45,7 +45,7 @@ class Auth {
             const result = await this.setToken(req.body.username, userDB[0].username, userDB[0].role)
             return response(res, 200, result)
         } 
-            logger.error("Check Password")
+            logger.warn("Check Password")
             return response(res, 200, {msg: "Check Password"})
 
         } catch (error) {

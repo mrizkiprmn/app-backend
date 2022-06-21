@@ -8,7 +8,7 @@ const db = require('./src/Configs/db');
 const bodyPars = require("body-parser");
 const morgan = require("morgan");
 const redis = require("./src/Configs/redis")
-const metrics = require('./src/middleware/metrics')
+const metrics = require('./utils/metrics')
 
 
 server.use(bodyPars.urlencoded({extended: false}));

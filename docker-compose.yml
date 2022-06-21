@@ -1,50 +1,31 @@
 version: "3.7"
 services: 
   redis:
-      container_name: redis-coffeeit
-      image: redis:alpine3.12
-      command: redis-server
-      environment: 
-        - REDIS_PORT=6379
-      ports:  
-        - "8586:6379"
-      networks: 
-        - netnet
-      volumes: 
-        - ./redis-data:/data
+    restart: always
+    container_name: redis
+    image: redis:alpine3.16
+    command: redis-server
+    environment: 
+      - REDIS_PASSWORD='${REDIS_PASS}'
+    ports:  
+      - "6379:6379"
+    volumes: 
+      - ./redis-data:/data
 
-  backend:
-      container_name: coffeit_backend
-      image: mrizkiprmn/backend-jenkins:master
-      ports: 
-          - "8282-8283:8888"
-      environment: 
-          - DBUSER=rizkipermana
-          - DBPASSWORD=admin123
-          - DBNAME=coffeeit
-          - DBHOST=3.83.153.65
-          - DBPORT=5432
-          - JWT_KEYS=inipunyarizki
-          - CLOUD_KEY=327521863331962
-          - CLOUD_SECRET=sr374waC435g04cuHmrWIqfEUE4
-          - CLOUD_NAME=coffeshop
-          - REDIS_HOST=redis
-          - REDIS_PORT=6379
-      deploy:
-       mode: replicated
-       replicas: 2
-       resources:
-         limits:
-           cpus: "0.50"
-           memory: 50M
-      networks: 
-          - netnet
-      depends_on: 
-          - redis
+  postgres:
+    restart: always
+    container_name: postgres
+    image: postgres:alpine3.16
+    environment:
+      - POSTGRES_USER='${DBUSER}'
+      - POSTGRES_PASSWORD='${DBPASSWORD}'
+      - POSTGRES_DB='{DBNAME}'
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
 
-networks: 
-    netnet:
-        driver: bridge
-
-volumes: 
-    redis-data:
+volumes:
+  postgres:
+  redis-data:

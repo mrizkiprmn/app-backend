@@ -11,7 +11,7 @@ users.getAll = async (req, res) => {
         logger.info("Get all Users Success")
         return response(res, 200, result);
     } catch (error){
-        logger.error("error")
+        logger.warn("error")
         return response(res, 500, error);
 
     };
@@ -24,12 +24,12 @@ users.add = async (req, res) => {
         const checkEmail = await model.getByEmail(req.body.email)
 
         if(checkUser.length > 0) {
-            logger.error("Username has been registered")
+            logger.warn("Username has been registered")
             return response(res, 209, {msg: "username has been registered"})
         }
 
         if(checkEmail.length > 0) {
-            logger.error("Email has been registered")
+            logger.warn("Email has been registered")
             return response(res, 209, {msg: "email has been registered"})
         }
 
