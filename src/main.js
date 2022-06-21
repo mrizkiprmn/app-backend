@@ -8,7 +8,7 @@ const users = require("./Routes/users");
 const auth = require("./Routes/auth")
 const { cloudinaryConfig } = require("./Configs/cloudInary")
 const logger = require("../utils/logger")
-const metrics = require('./middleware/metrics')
+const metrics = require('../utils/metrics')
 
 routes.use("*", cloudinaryConfig)
 routes.use("/sorted", sorted)

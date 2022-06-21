@@ -1,7 +1,7 @@
 {
-  "name": "backendfigma",
+  "name": "expressjs",
   "version": "1.0.0",
-  "description": "backend api figma",
+  "description": "services backend expressjs",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,10 +10,12 @@
   "keywords": [
     "express",
     "restfull",
-    "figma"
+    "api",
+    "backend",
+    "nodejs"
   ],
   "author": "mrizkiprmn",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
@@ -22,13 +24,32 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-prom-bundle": "^6.4.1",
+    "jaeger-client": "^3.19.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "morgan": "^1.10.0",
-    "multer": "^1.4.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.16",
     "pg": "^8.5.1",
     "prom-client": "^14.0.1",
     "redis": "^3.0.2",
     "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@opentelemetry/api": "^1.1.0",
+    "@opentelemetry/auto-instrumentations-node": "^0.31.0",
+    "@opentelemetry/exporter-collector": "^0.25.0",
+    "@opentelemetry/exporter-jaeger": "^1.3.1",
+    "@opentelemetry/instrumentation": "^0.29.2",
+    "@opentelemetry/plugin-express": "^0.15.0",
+    "@opentelemetry/plugin-http": "^0.18.2",
+    "@opentelemetry/propagator-ot-trace": "^0.26.0",
+    "@opentelemetry/resources": "^1.3.1",
+    "@opentelemetry/sdk-node": "^0.29.2",
+    "@opentelemetry/sdk-trace-base": "^1.3.1",
+    "@opentelemetry/sdk-trace-node": "^1.3.1",
+    "@opentelemetry/semantic-conventions": "^1.3.1",
+    "@opentelemetry/tracing": "^0.24.0",
+    "axios": "^0.27.2"
   }
 }

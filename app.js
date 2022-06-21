@@ -9,7 +9,9 @@ const bodyPars = require("body-parser");
 const morgan = require("morgan");
 const redis = require("./src/Configs/redis")
 const metrics = require('./utils/metrics')
+const { init } = require('./utils/tracer')
 
+init('app-backend', 'development')
 
 server.use(bodyPars.urlencoded({extended: false}));
 server.use(cors());
@@ -22,10 +24,10 @@ server.use('/metrics', metrics)
 
 db.connect()
     .then((res) => {
-        logger.info("Database Connected");
+        logger.info(res);
 })
     .catch((err)=> {
-        logger.error("Database not Connected");
+        logger.error(err);
 })
 
 
